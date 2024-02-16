@@ -1,23 +1,51 @@
-# docker-yasgui
+# YASGUI Docker image
 
-Docker image of nginx hosting [YASGUI](http://doc.yasgui.org/).
+This is a Docker image for hosting a
+[Yasgui](https://github.com/TriplyDB/Yasgui) instance.
+
+> Yasgui provides various advanced features for creating, sharing, and
+> visualizing SPARQL queries and their results.
+
+**NOTE:** this project aims to be an upgrade and drop-in replacement for
+[docker-yasgui](https://github.com/erikap/docker-yasgui). That repository
+hasn't been maintained in over 6 years and there where a lot of bugs in the
+Yasgui version used. Yasgui itself has also not seen any development in the
+past 2 years, so it should be pretty stable.
 
 ## Installation
-Add the following snippet to your `docker-compose.yml` to add YASGUI to your stack:
+
+To use this image in a Docker Compose stack, put the following snippet in a
+`docker-compose.yml` file:
 
 ```
 services:
   yasgui:
-    image: erikap/yasgui
+    image: <image-name>
     environment:
-      DEFAULT_SPARQL_ENDPOINT: "http://linked.toerismevlaanderen.be/sparql"
+      DEFAULT_SPARQL_ENDPOINT: "http://some-endpoint:8890/sparql"
 ```
 
 ## Configuration
-The following environment variables can be set to configure YASGUI:
 
-#### DEFAULT_SPARQL_ENDPOINT
-The default SPARQL endpoint used by YASGUI. Defaults to `http://localhost/sparql`. The endpoint must be the publicly accessible URL of the SPARQL endpoint as used on the client-side.
+There is only one environment variable for now. Use it as given by the example
+above.
 
-#### ENABLE_ENDPOINT_SELECTOR
-Flag to enable the SPARQL endpoint input field. Defaults to `false`. Set to `true` if you want the user to be able to enter a custom SPARQL endpoint URL. If set to `false` all SPARQL queries will be executed against the `DEFAULT_SPARQL_ENDPOINT`.
+* `DEFAULT_SPARQL_ENDPOINT`: *(optional, default:
+  `http://localhost:8890/sparql`)*, give the host and path to a SPARQL endpoint
+  you want this Yasgui instance to point to by default. You can always change
+  the endpoint from the Yasgui itself later.
+
+## How this repository works
+
+This repository contains a Dockerfile that is used to build a complete Yasgui
+image. It prepares an image based on Node 16 with Alpine as its base, clones
+the official GitHub repository for [Yasgui](https://github.com/TriplyDB/Yasgui)
+into it and builds the application. The built sources are copied to another
+image, Apache on Alpine, to serve these files as a static web application.
+
+The extra scripts are helper scripts to move and rename files, as well as to
+dynamically replace the default SPARQL endpoint with the value provided via the
+environment variable.
+
+When using the built image, no external hosts (e.g. CDNs) are needed to load
+scripts. Everything is contained in this image (except for some font files).

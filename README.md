@@ -1,4 +1,4 @@
-# YASGUI Docker image
+# Yasgui Docker image
 
 This is a Docker image for hosting a
 [Yasgui](https://github.com/TriplyDB/Yasgui) instance.
@@ -17,7 +17,7 @@ past 2 years, so it should be pretty stable.
 To use this image in a Docker Compose stack, put the following snippet in a
 `docker-compose.yml` file:
 
-```
+```yaml
 services:
   yasgui:
     image: <image-name>

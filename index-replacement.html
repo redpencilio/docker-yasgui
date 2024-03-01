@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="yasgui.png">
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0px;
+      }
+    </style>
+    <script src="./yasgui.polyfill.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>YASGUI</title>
+    <link href="/yasgui.min.css" rel="stylesheet">
+    <link href="/yasqe.min.css" rel="stylesheet">
+    <link href="/yasr.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="yasgui"></div>
+    <script>
+      window.onpageshow = function () {
+        window.yasgui = new Yasgui(document.getElementById("yasgui"), {
+          corsProxy: "",
+          requestConfig: {
+            endpoint: "~DEFAULT_SPARQL_ENDPOINT~",
+          }
+        });
+      };
+    </script>
+    <script src="/yasgui.min.js"></script>
+    <script src="/yasqe.min.js"></script>
+    <script src="/yasr.min.js"></script>
+  </body>
+</html>

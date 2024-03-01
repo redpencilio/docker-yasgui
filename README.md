@@ -6,12 +6,6 @@ This is a Docker image for hosting a
 > Yasgui provides various advanced features for creating, sharing, and
 > visualizing SPARQL queries and their results.
 
-**NOTE:** this project aims to be an upgrade and drop-in replacement for
-[docker-yasgui](https://github.com/erikap/docker-yasgui). That repository
-hasn't been maintained in over 6 years and there where a lot of bugs in the
-Yasgui version used. Yasgui itself has also not seen any development in the
-past 2 years, so it should be pretty stable.
-
 ## Installation
 
 To use this image in a Docker Compose stack, put the following snippet in a
@@ -20,9 +14,9 @@ To use this image in a Docker Compose stack, put the following snippet in a
 ```yaml
 services:
   yasgui:
-    image: <image-name>
+    image: redpencil/yasgui:latest
     environment:
-      DEFAULT_SPARQL_ENDPOINT: "http://some-endpoint:8890/sparql"
+      DEFAULT_SPARQL_ENDPOINT: "http://localhost/sparql"
 ```
 
 ## Configuration

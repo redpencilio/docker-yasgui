@@ -20,22 +20,18 @@ services:
 ```
 
 ### Run YASGUI as a standalone application
-Just start the application using docker compose. You probably first want to publish a port to make the YASGUI editor available on localhost
-
-Open `docker-compose.yml` and add port publication to the service, for example on port 8891
-```yaml
-services:
-  yasgui:
-    image: redpencil/yasgui:latest
-    ports: 
-      - "8080:80"
-```
-
-Next, start the application
+Just start the application using docker compose. YASGUI will be available on http://localhost:8080.
 
 ```bash
 docker compose up -d
 ```
+
+If `docker-compose.dev.yml` is not taken into account automatically on your machine, start the application as follows
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+```
+
 ## Reference
 ### Configuration
 

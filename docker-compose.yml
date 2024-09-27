@@ -3,5 +3,3 @@ services:
     image: redpencil/yasgui:latest
     environment:
       DEFAULT_SPARQL_ENDPOINT: "http://localhost:8890/sparql"
-    ports:
-      - "8080:80"

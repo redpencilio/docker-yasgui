@@ -1,0 +1,4 @@
+services:
+  yasgui:
+    ports:
+      - "8080:80"

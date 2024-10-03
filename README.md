@@ -32,6 +32,27 @@ If `docker-compose.dev.yml` is not taken into account automatically on your mach
 docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 ```
 
+### Make your hosted SPARQL endpoint accessible via Yasgui
+
+If you are hosting a stack that exposes a SPARQL endpoint, you can enable CORS to ensure Yasgui can access your SPARQL endpoint.
+
+To do so, you have to add the following configuration to your `docker-compose.yml`:
+
+```yaml
+services:
+  identifier:
+    environment:
+      DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
+```
+And add a route handler for `OPTION` calls to your `dispatcher.ex`:
+```ex
+options "*_path" do
+  send_resp( conn, 200, "Option calls are accepted by default" )
+end
+```
+
+For more information you can check the READMEs of the [mu-identifier service](https://github.com/mu-semtech/mu-identifier?tab=readme-ov-file#how-to-make-a-stack-accessible-from-an-external-host-cors) and the [mu-dispatcher service](https://github.com/mu-semtech/mu-dispatcher?tab=readme-ov-file#External-API-CORS-headers).
+
 ## Reference
 ### Configuration
 
